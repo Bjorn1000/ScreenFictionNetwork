@@ -1,6 +1,6 @@
 <div *ngIf="movies?.length > 0; else noMovies">
   <ul *ngFor="let movie of movies" class="collection">
-    <li class="collection-item"><strong>{{movie.title}} :</strong> {{movie.description}}
+    <li class="collection-item"><a [routerLink]="['/movie/'+movie.id]"><strong>{{movie.title}} :</strong> {{movie.description}}</a>
     <a href="#" class="secondary-content">
       <i (click)="editMovie($event, movie)" class="fa fa-pencil"></i>
       <i *ngIf="editState && movieToEdit.id == movie.id" (click)="clearState()" class="fa fa-compress"></i>
