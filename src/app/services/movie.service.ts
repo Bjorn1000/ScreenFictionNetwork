@@ -25,9 +25,15 @@ export class MovieService {
   queryTester(id) {
     console.log(id);
     this.moviesCollection = this.afs.collection('movies', ref => {
-      return ref.where('id', '==', id);
+      return ref.where('title', '==', 'Dragon ball');
     });
-    return this.movies = this.moviesCollection.valueChanges();
+    this.movies = this.moviesCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Movie;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    });
   }
 
   getMovies() {

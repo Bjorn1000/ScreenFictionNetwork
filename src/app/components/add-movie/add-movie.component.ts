@@ -10,7 +10,8 @@ import {Movie} from '../../models/movie';
 export class AddMovieComponent implements OnInit {
   movie: Movie = {
     title: '',
-    description: ''
+    description: '',
+    link: ''
 
   };
 
@@ -19,10 +20,11 @@ export class AddMovieComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit() {
-    if (this.movie.title !== '' && this.movie.description !== '') {
+    if (this.movie.title !== '' && this.movie.description !== '' && this.movie.link !== '') {
       this.movieService.addMovie(this.movie);
       this.movie.title = '';
       this.movie.description = '';
+      this.movie.link = '';
     }
   }
 
