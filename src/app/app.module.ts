@@ -12,11 +12,15 @@ import {MovieService} from './services/movie.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
 import { HomeComponent } from './components/home/home.component';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { MovieComponent } from './components/movie/movie.component';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages/module/flash-messages.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'movies', component: MoviesComponent},
-  // {path: 'movie/:id', component: MovieComponent},
+  {path: 'movie/:id', component: MovieComponent},
   {path: 'add-movie', component: AddMovieComponent}
 ];
 
@@ -26,16 +30,18 @@ const appRoutes: Routes = [
     MoviesComponent,
     NavbarComponent,
     AddMovieComponent,
-    HomeComponent
+    HomeComponent,
+    MovieComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
     AngularFirestoreModule,
+    FlashMessagesModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [MovieService],
+  providers: [MovieService, AngularFireAuth, FlashMessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

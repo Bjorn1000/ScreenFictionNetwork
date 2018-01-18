@@ -22,6 +22,13 @@ export class MovieService {
       });
     });
   }
+  queryTester(id) {
+    console.log(id);
+    this.moviesCollection = this.afs.collection('movies', ref => {
+      return ref.where('id', '==', id);
+    });
+    return this.movies = this.moviesCollection.valueChanges();
+  }
 
   getMovies() {
     return this.movies;

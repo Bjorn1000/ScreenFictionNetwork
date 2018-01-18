@@ -11,6 +11,7 @@ export class AddMovieComponent implements OnInit {
   movie: Movie = {
     title: '',
     description: ''
+
   };
 
   constructor(private movieService: MovieService) { }
@@ -18,7 +19,7 @@ export class AddMovieComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit() {
-    if (this.movie.title !== '' && this.movie.description != '') {
+    if (this.movie.title !== '' && this.movie.description !== '') {
       this.movieService.addMovie(this.movie);
       this.movie.title = '';
       this.movie.description = '';
