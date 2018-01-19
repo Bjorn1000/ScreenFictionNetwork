@@ -14,12 +14,17 @@ export class AddMovieComponent implements OnInit {
     link: ''
 
   };
+  substr: string;
+  afterComma: string;
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
   }
   onSubmit() {
+    this.substr = this.movie.link;
+    this.afterComma = this.substr.substr(this.substr.indexOf('=') + 1);
+    this.movie.link = 'https://www.youtube.com/embed/' + this.afterComma;
     if (this.movie.title !== '' && this.movie.description !== '' && this.movie.link !== '') {
       this.movieService.addMovie(this.movie);
       this.movie.title = '';

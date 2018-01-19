@@ -39,7 +39,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     FlashMessagesModule,
     RouterModule.forRoot(appRoutes)
   ],
