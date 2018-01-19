@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
+import {SanitzierY} from '../pipes/sanitizer';
 
 import {environment} from '../environments/environment';
 import {AngularFireModule} from 'angularfire2';
@@ -12,11 +13,15 @@ import {MovieService} from './services/movie.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
 import { HomeComponent } from './components/home/home.component';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { MovieComponent } from './components/movie/movie.component';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages/module/flash-messages.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'movies', component: MoviesComponent},
-  // {path: 'movie/:id', component: MovieComponent},
+  {path: 'movie/:id', component: MovieComponent},
   {path: 'add-movie', component: AddMovieComponent}
 ];
 
@@ -26,16 +31,19 @@ const appRoutes: Routes = [
     MoviesComponent,
     NavbarComponent,
     AddMovieComponent,
-    HomeComponent
+    HomeComponent,
+    MovieComponent,
+    SanitzierY
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
+    FlashMessagesModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [MovieService],
+  providers: [MovieService, AngularFireAuth, FlashMessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
