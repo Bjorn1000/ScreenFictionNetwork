@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     name: 'sanitizer'
 })
 @Injectable()
-export class SanitzierY implements PipeTransform {
+export class Sanitzier implements PipeTransform {
     constructor(private dom: DomSanitizer) {
 
     }

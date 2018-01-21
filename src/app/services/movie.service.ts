@@ -17,7 +17,6 @@ export class MovieService {
     this.moviesCollection = this.afs.collection('movies', ref => ref.orderBy('title', 'asc'));
 
     this.movies = this.moviesCollection.snapshotChanges().map(changes => {
-      console.log(changes);
       return changes.map(a => {
         const data = a.payload.doc.data() as Movie;
         data.id = a.payload.doc.id;
