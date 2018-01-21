@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MovieService} from '../../services/movie.service';
 import {Movie} from '../../models/movie';
-import { OnDestroy, OnChanges, DoCheck } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OnDestroy, OnChanges} from '@angular/core/src/metadata/lifecycle_hooks';
 import {Subscription} from 'rxjs/Subscription';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 
 @Component({
@@ -15,13 +17,23 @@ export class MoviesComponent implements OnInit, OnDestroy {
   editState: boolean;
   movieToEdit: Movie;
   subscription: Subscription;
-  constructor(public movieService: MovieService) { }
+  user: string;
+  author: string;
+
+  constructor(public movieService: MovieService, public afAuth: AngularFireAuth) { }
 
   ngOnInit() {
-    console.log('test');
     this.subscription = this.movieService.getMovies().subscribe(movies => {
       this.movies = movies;
     });
+    if (this.afAuth.auth.currentUser == null) {
+      this.user = 'no user';
+      console.log(this.user);
+    } else {
+      this.user = this.afAuth.auth.currentUser.uid;
+      console.log(this.user);
+    }
+
   }
   deleteMovie(event, movie) {
     this.clearState();
@@ -43,7 +55,6 @@ export class MoviesComponent implements OnInit, OnDestroy {
     this.movieToEdit = null;
   }
   ngOnDestroy() {
-    console.log('get out');
     this.subscription.unsubscribe();
   }
 

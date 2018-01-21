@@ -3,4 +3,5 @@ export interface Movie {
     title?: string;
     description?: string;
     link?: string;
+    author?: string;
   }
