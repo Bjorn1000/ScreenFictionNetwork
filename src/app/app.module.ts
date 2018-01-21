@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
-import {SanitzierY} from '../pipes/sanitizer';
+import {Sanitzier} from '../pipes/sanitizer';
 
 import {environment} from '../environments/environment';
 import {AngularFireModule} from 'angularfire2';
@@ -17,9 +17,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { MovieComponent } from './components/movie/movie.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FlashMessagesService } from 'angular2-flash-messages/module/flash-messages.service';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'movies', component: MoviesComponent},
   {path: 'movie/:id', component: MovieComponent},
   {path: 'add-movie', component: AddMovieComponent}
@@ -33,7 +37,9 @@ const appRoutes: Routes = [
     AddMovieComponent,
     HomeComponent,
     MovieComponent,
-    SanitzierY
+    Sanitzier,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
