@@ -14,7 +14,8 @@
         <li><a (click)="logout()">Logout</a></li>
       </div>
       <ng-template #showRegister>
-        <a (click)="register()">Register</a>
+        <a [routerLink]="['/register']">Register</a>
+        <a (click)="['/login']">Login</a>
       </ng-template>
     </ul>
   </div>

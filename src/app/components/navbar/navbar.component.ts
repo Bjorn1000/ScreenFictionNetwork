@@ -14,10 +14,6 @@ export class NavbarComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public flashMessage: FlashMessagesService
   ) {}
-  login() {
-    //this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    this.afAuth.auth.signInWithPopup(new firebase.auth.EmailAuthProvider);
-  }
   logout() {
     this.afAuth.auth.signOut();
     this.flashMessage.show('You are logged out', {cssClass: 'alert-success', timeout: 3000});
