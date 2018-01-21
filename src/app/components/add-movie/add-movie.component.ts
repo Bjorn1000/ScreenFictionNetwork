@@ -27,9 +27,11 @@ export class AddMovieComponent implements OnInit {
   }
   onSubmit() {
     // This converts normal youtube links to embedded youtube links before they go to firebase
+    // also converts normal youtube links to thumbnail urls as well
     this.substr = this.movie.link;
     this.afterEqual = this.substr.substr(this.substr.indexOf('=') + 1);
     this.movie.link = 'https://www.youtube.com/embed/' + this.afterEqual;
+    this.movie.thumbnail = 'https://img.youtube.com/vi/' + this.afterEqual + '/default.jpg';
     // this adds the user's id to the movie's author field
     this.movie.author = this.afAuth.auth.currentUser.uid;
 
