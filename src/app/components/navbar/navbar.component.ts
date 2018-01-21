@@ -15,7 +15,8 @@ export class NavbarComponent implements OnInit {
     public flashMessage: FlashMessagesService
   ) {}
   login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    //this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.afAuth.auth.signInWithPopup(new firebase.auth.EmailAuthProvider);
   }
   logout() {
     this.afAuth.auth.signOut();

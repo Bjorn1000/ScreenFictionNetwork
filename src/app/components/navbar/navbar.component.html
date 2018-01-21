@@ -3,17 +3,18 @@
   <div class="nav-wrapper black">
     <a href="/" class="brand-logo center">Screen fiction network</a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li><a [routerLink]="['/movies']">Your Films</a></li>
-      <li><a [routerLink]="['/add-movie']">Add Films</a></li>
-      
+      <div *ngIf="afAuth.authState | async as user;">
+        <li><a [routerLink]="['/movies']">Your Films</a></li>
+        <li><a [routerLink]="['/add-movie']">Add Films</a></li>
+      </div>
     </ul>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <div *ngIf="afAuth.authState | async as user; else showLogin">
+      <div *ngIf="afAuth.authState | async as user; else showRegister">
         <li>User: {{ user.displayName }}</li>
         <li><a (click)="logout()">Logout</a></li>
       </div>
-      <ng-template #showLogin>
-        <a (click)="login()">Login with Google</a>
+      <ng-template #showRegister>
+        <a (click)="register()">Register</a>
       </ng-template>
     </ul>
   </div>
