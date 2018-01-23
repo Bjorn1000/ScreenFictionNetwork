@@ -21,7 +21,12 @@ export class LoginComponent implements OnInit {
   }
   onLoginSubmit() {
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
+    if (this.afAuth.auth.currentUser == null) {
+      console.log('no session');
+    } else {
+      // sets up session item
+      sessionStorage.setItem('userId', this.afAuth.auth.currentUser.uid);
+    }
     this.router.navigate(['/']);
   }
-
 }

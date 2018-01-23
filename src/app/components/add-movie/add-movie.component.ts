@@ -30,6 +30,10 @@ export class AddMovieComponent implements OnInit {
     // also converts normal youtube links to thumbnail urls as well
     this.substr = this.movie.link;
     this.afterEqual = this.substr.substr(this.substr.indexOf('=') + 1);
+    console.log(this.afterEqual);
+    if (this.afterEqual.includes('&')) {
+      this.afterEqual =  this.afterEqual.substr(0, this.afterEqual.indexOf('&'));
+    }
     this.movie.link = 'https://www.youtube.com/embed/' + this.afterEqual;
     this.movie.thumbnail = 'https://img.youtube.com/vi/' + this.afterEqual + '/default.jpg';
     // this adds the user's id to the movie's author field
