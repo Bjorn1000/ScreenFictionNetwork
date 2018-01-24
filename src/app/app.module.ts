@@ -19,6 +19,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FlashMessagesService } from 'angular2-flash-messages/module/flash-messages.service';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { ValidateService } from './services/validate.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -45,11 +46,11 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
-    AngularFirestoreModule.enablePersistence(),
+    AngularFirestoreModule,
     FlashMessagesModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [MovieService, AngularFireAuth, FlashMessagesService],
+  providers: [MovieService, AngularFireAuth, FlashMessagesService, ValidateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

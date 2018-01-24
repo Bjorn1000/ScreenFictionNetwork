@@ -7,6 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 
+
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
@@ -19,6 +20,8 @@ export class MoviesComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   user: string;
   author: string;
+  substr: string;
+  afterEqual: string;
 
   constructor(public movieService: MovieService, public afAuth: AngularFireAuth) { }
 
@@ -26,13 +29,16 @@ export class MoviesComponent implements OnInit, OnDestroy {
     this.subscription = this.movieService.getMovies().subscribe(movies => {
       this.movies = movies;
     });
+    console.log(sessionStorage.getItem('userId'));
     if (this.afAuth.auth.currentUser == null) {
       this.user = 'no user';
-      console.log(this.user);
+      this.user = sessionStorage.getItem('userId');
     } else {
       this.user = this.afAuth.auth.currentUser.uid;
-      console.log(this.user);
+      sessionStorage.setItem('userId', this.afAuth.auth.currentUser.uid);
     }
+
+
 
   }
   deleteMovie(event, movie) {
@@ -41,6 +47,16 @@ export class MoviesComponent implements OnInit, OnDestroy {
   }
 
   editMovie(event, movie) {
+    /*
+    this.substr = movie.link;
+    this.afterEqual = this.substr.substr(this.substr.indexOf('=') + 1);
+    console.log(this.afterEqual);
+    if (this.afterEqual.includes('&')) {
+      this.afterEqual =  this.afterEqual.substr(0, this.afterEqual.indexOf('&'));
+    }
+    movie.link = 'https://www.youtube.com/embed/' + this.afterEqual;
+    movie.thumbnail = 'https://img.youtube.com/vi/' + this.afterEqual + '/default.jpg';
+    */
     this.editState = true;
     this.movieToEdit = movie;
   }

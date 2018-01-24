@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   movies: Movie[];
   constructor(
     public movieService: MovieService,
-    // declared in constructor for the login method so that the picture does more than look pretty
     public afAuth: AngularFireAuth,
     public flashMessage: FlashMessagesService
   ) { }
@@ -23,7 +22,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.movieService.getMovies().subscribe(movies => {
       this.movies = movies;
-      console.log(this.movies);
     });
   }
   // login method for google picture
