@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { youtubeValidator } from 'youtube-validator';
 
 @Injectable()
 export class ValidateService {

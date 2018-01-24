@@ -3,6 +3,7 @@ import {MovieService} from '../../services/movie.service';
 import {Movie} from '../../models/movie';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import {ValidateService} from '../../services/validate.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AddMovieComponent implements OnInit {
   substr: string;
   afterEqual: string;
 
-  constructor(private movieService: MovieService, public afAuth: AngularFireAuth) { }
+  constructor(private movieService: MovieService, private validateService: ValidateService, public afAuth: AngularFireAuth) { }
 
   ngOnInit() {
   }
@@ -29,6 +30,7 @@ export class AddMovieComponent implements OnInit {
     // This converts normal youtube links to embedded youtube links before they go to firebase
     // also converts normal youtube links to thumbnail urls as well
     this.substr = this.movie.link;
+    this.validateService.validateLink(this.substr);
     this.afterEqual = this.substr.substr(this.substr.indexOf('=') + 1);
     console.log(this.afterEqual);
     if (this.afterEqual.includes('&')) {
